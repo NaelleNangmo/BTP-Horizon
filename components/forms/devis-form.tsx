@@ -11,8 +11,9 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useToast } from "@/hooks/use-toast"
-import { Loader2, Calculator, MessageSquare } from "lucide-react"
+import { Loader2, MessageSquare, Send } from "lucide-react"
 import Link from "next/link"
+import { formatQuoteForWhatsApp, generateWhatsAppURL, WHATSAPP_PHONE, type QuoteData } from "@/lib/whatsapp"
 
 const devisSchema = z.object({
   nom: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
@@ -107,6 +108,34 @@ export function DevisForm() {
     }
     setSelectedServices(newServices)
     setValue("services", newServices)
+  }
+
+  const sendViaWhatsApp = (data: DevisFormData) => {
+    const quoteData: QuoteData = {
+      nom: data.nom,
+      email: data.email,
+      telephone: data.telephone,
+      entreprise: data.entreprise,
+      typeProjet: data.typeProjet,
+      localisation: data.localisation,
+      surface: data.surface,
+      budgetEstimatif: data.budgetEstimatif,
+      delaiSouhaite: data.delaiSouhaite,
+      description: data.description,
+      services: data.services,
+      urgence: data.urgence,
+      visite: data.visite,
+    }
+
+    const formattedMessage = formatQuoteForWhatsApp(quoteData)
+    const whatsappUrl = generateWhatsAppURL(WHATSAPP_PHONE, formattedMessage)
+
+    window.open(whatsappUrl, "_blank")
+
+    toast({
+      title: "Redirection vers WhatsApp",
+      description: "Votre demande de devis a été formatée et vous êtes redirigé vers WhatsApp.",
+    })
   }
 
   const onSubmit = async (data: DevisFormData) => {
@@ -374,38 +403,48 @@ export function DevisForm() {
           </div>
         </div>
 
-        {/* Submit Button */}
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-orange hover:bg-orange/90 text-white font-medium py-3"
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Envoi en cours...
-            </>
-          ) : (
-            <>
-              <Calculator className="mr-2 h-4 w-4" />
-              Demander le devis
-            </>
-          )}
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="flex-1 bg-orange hover:bg-orange/90 text-white font-medium py-3"
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Envoi en cours...
+              </>
+            ) : (
+              <>
+                <Send className="mr-2 h-4 w-4" />
+                Envoyer par email
+              </>
+            )}
+          </Button>
+
+          <Button
+            type="button"
+            onClick={handleSubmit(sendViaWhatsApp)}
+            variant="outline"
+            className="flex-1 border-green-500 text-green-600 hover:bg-green-50 bg-transparent font-medium py-3"
+          >
+            <MessageSquare className="mr-2 h-4 w-4" />
+            Envoyer via WhatsApp
+          </Button>
+        </div>
       </form>
 
-      {/* WhatsApp Alternative */}
       <div className="border-t pt-6">
         <div className="text-center">
-          <p className="text-steel mb-4">Besoin d'aide pour remplir le formulaire ?</p>
+          <p className="text-steel mb-4">Préférez-vous discuter directement ?</p>
           <Link
-            href="https://wa.me/237657772686?text=Bonjour%20BTP%20Horizon%20Cameroun,%20j'aimerais%20obtenir%20un%20devis%20pour%20mon%20projet."
+            href={`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent("Bonjour BTP Horizon Cameroun, j'aimerais discuter d'un projet de construction.")}`}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button variant="outline" className="border-green-500 text-green-600 hover:bg-green-50 bg-transparent">
+            <Button variant="ghost" className="text-green-600 hover:bg-green-50">
               <MessageSquare className="mr-2 h-4 w-4" />
-              Discuter via WhatsApp
+              Chat direct sur WhatsApp
             </Button>
           </Link>
         </div>

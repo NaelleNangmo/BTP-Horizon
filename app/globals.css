@@ -194,13 +194,45 @@
     background-color: #f5f7fa;
   }
 
+  /* Added dark mode variants for brand colors */
+  .dark .text-navy {
+    color: #ffffff;
+  }
+
+  .dark .text-steel {
+    color: #e5e7eb;
+  }
+
+  .dark .bg-navy {
+    background-color: #1f2937;
+  }
+
+  .dark .bg-steel {
+    background-color: #374151;
+  }
+
+  .dark .bg-light-gray {
+    background-color: #111827;
+  }
+
   .gradient-diagonal {
     background: linear-gradient(135deg, #0f2a3d 0%, #1f4e6b 100%);
   }
 
+  /* Enhanced glassmorphism with dark mode support */
   .glassmorphism {
     backdrop-filter: blur(10px);
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .dark .glassmorphism {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Added radial gradient utility */
+  .bg-radial-gradient {
+    background: radial-gradient(circle at center, var(--tw-gradient-stops));
   }
 }

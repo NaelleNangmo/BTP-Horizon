@@ -3,6 +3,9 @@ import type { Metadata } from "next"
 import { Montserrat, Inter } from "next/font/google"
 import { DefaultSeo } from "next-seo"
 import { Toaster } from "@/components/ui/toaster"
+import { ThemeProvider } from "@/components/providers/theme-provider"
+import { LanguageProvider } from "@/components/providers/language-provider"
+import { WhatsAppFloat } from "@/components/ui/whatsapp-float"
 import { defaultSEO } from "@/lib/seo"
 import { organizationSchema, localBusinessSchema } from "@/lib/schema"
 import "./globals.css"
@@ -79,9 +82,14 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans">
-        <DefaultSeo {...defaultSEO} />
-        {children}
-        <Toaster />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <LanguageProvider>
+            <DefaultSeo {...defaultSEO} />
+            {children}
+            <Toaster />
+            <WhatsAppFloat />
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
