@@ -39,22 +39,22 @@ export function Hero() {
   const typewriterText = useTypewriter(slogan, 80)
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-navy to-slate-800 dark:from-slate-950 dark:via-slate-900 dark:to-black">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-100 via-blue-50 to-gray-200 dark:from-slate-900 dark:via-navy dark:to-slate-800">
       {/* 3D Background */}
-      <div className="absolute inset-0 opacity-70">
+      <div className="absolute inset-0 opacity-90 dark:opacity-70">
         <HeroCanvas />
       </div>
 
       {/* Enhanced overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-navy/60 to-slate-900/90" />
-      <div className="absolute inset-0 bg-radial-gradient from-transparent via-navy/30 to-slate-900/80" />
+      <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-blue-50/30 to-white/20 dark:from-slate-900/90 dark:via-navy/60 dark:to-slate-900/90" />
+      <div className="absolute inset-0 bg-radial-gradient from-transparent via-blue-100/20 to-white/40 dark:from-transparent dark:via-navy/30 dark:to-slate-900/80" />
 
       {/* Animated particles overlay */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-orange/30 rounded-full animate-pulse"
+            className="absolute w-1 h-1 bg-orange/60 dark:bg-orange/30 rounded-full animate-pulse"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -66,21 +66,23 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center text-white">
+      <div className="relative z-10 container mx-auto px-4 text-center text-navy dark:text-white">
         <Reveal direction="up" delay={0.2}>
           <div className="max-w-4xl mx-auto">
             {/* Company Name */}
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 drop-shadow-2xl">
-              <span className="text-white drop-shadow-lg">BTP</span>{" "}
+              <span className="text-navy dark:text-white drop-shadow-lg">BTP</span>{" "}
               <span className="text-orange drop-shadow-lg animate-pulse">Horizon</span>
             </h1>
 
             {/* Subtitle */}
-            <div className="text-lg md:text-xl text-gray-200 mb-8 drop-shadow-lg">Cameroun</div>
+            <div className="text-lg md:text-xl text-steel dark:text-gray-200 mb-8 drop-shadow-lg font-medium">
+              Cameroun
+            </div>
 
             {/* Typewriter Slogan */}
             <div className="h-16 flex items-center justify-center mb-12">
-              <p className="text-2xl md:text-3xl lg:text-4xl font-light text-white drop-shadow-xl">
+              <p className="text-2xl md:text-3xl lg:text-4xl font-light text-navy dark:text-white drop-shadow-xl font-serif">
                 {typewriterText}
                 <span className="animate-pulse text-orange">|</span>
               </p>
@@ -101,7 +103,7 @@ export function Hero() {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-white/80 text-white hover:bg-white hover:text-navy px-8 py-4 text-lg bg-white/10 backdrop-blur-sm shadow-2xl hover:shadow-white/25 transition-all duration-300 hover:scale-105"
+                  className="border-navy/80 dark:border-white/80 text-navy dark:text-white hover:bg-navy hover:text-white dark:hover:bg-white dark:hover:text-navy px-8 py-4 text-lg bg-white/80 dark:bg-white/10 backdrop-blur-sm shadow-2xl hover:shadow-navy/25 dark:hover:shadow-white/25 transition-all duration-300 hover:scale-105"
                 >
                   <Play className="mr-2 h-5 w-5" />
                   {t("hero.projects")}
@@ -111,7 +113,7 @@ export function Hero() {
 
             <Reveal direction="up" delay={0.8}>
               <div className="text-center">
-                <p className="text-gray-300 mb-4 drop-shadow-lg">{t("hero.quote.text")}</p>
+                <p className="text-steel dark:text-gray-300 mb-4 drop-shadow-lg font-medium">{t("hero.quote.text")}</p>
                 <Link href="/devis">
                   <Button
                     variant="ghost"
@@ -127,8 +129,8 @@ export function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/80 rounded-full flex justify-center shadow-lg backdrop-blur-sm">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-navy dark:text-white animate-bounce">
+        <div className="w-6 h-10 border-2 border-navy/80 dark:border-white/80 rounded-full flex justify-center shadow-lg backdrop-blur-sm">
           <div className="w-1 h-3 bg-orange rounded-full mt-2 animate-pulse shadow-lg"></div>
         </div>
       </div>

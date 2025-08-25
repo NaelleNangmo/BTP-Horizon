@@ -194,7 +194,7 @@
     background-color: #f5f7fa;
   }
 
-  /* Added dark mode variants for brand colors */
+  /* Enhanced dark mode variants for better text visibility */
   .dark .text-navy {
     color: #ffffff;
   }
@@ -213,6 +213,23 @@
 
   .dark .bg-light-gray {
     background-color: #111827;
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6 {
+    color: #ffffff;
+  }
+
+  .dark p {
+    color: #e5e7eb;
+  }
+
+  .dark .text-muted-foreground {
+    color: #9ca3af;
   }
 
   .gradient-diagonal {
@@ -234,5 +251,25 @@
   /* Added radial gradient utility */
   .bg-radial-gradient {
     background: radial-gradient(circle at center, var(--tw-gradient-stops));
+  }
+
+  /* Added WhatsApp floating button animations */
+  .whatsapp-float {
+    animation: whatsapp-pulse 2s infinite;
+  }
+
+  @keyframes whatsapp-pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+    }
+    70% {
+      transform: scale(1.05);
+      box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
   }
 }

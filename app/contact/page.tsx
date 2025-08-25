@@ -6,6 +6,7 @@ import { Section } from "@/components/common/section"
 import { SectionHeading } from "@/components/common/section-heading"
 import { Reveal } from "@/components/animations/reveal"
 import { ContactForm } from "@/components/forms/contact-form"
+import { GoogleMap } from "@/components/contact/google-map"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -106,14 +107,7 @@ export default function ContactPage() {
             <Reveal direction="right">
               <div>
                 <h2 className="text-2xl font-serif font-semibold text-navy mb-6">Notre localisation</h2>
-                <div className="bg-light-gray rounded-2xl p-8 h-96 flex items-center justify-center">
-                  <div className="text-center text-steel">
-                    <MapPin className="h-12 w-12 mx-auto mb-4 text-orange" />
-                    <p className="text-lg font-medium mb-2">Face hôtel Mermoz</p>
-                    <p>Douala – Cameroun</p>
-                    <p className="text-sm mt-4">Carte Google Maps à intégrer</p>
-                  </div>
-                </div>
+                <GoogleMap />
               </div>
             </Reveal>
           </div>
